@@ -1,0 +1,26 @@
+{
+  "name": "meituan-app",
+  "version": "1.0.0",
+  "description": "My kickass Nuxt.js project",
+  "author": "bingfeng yu",
+  "private": true,
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development nodemon server/index.js --watch server --exec babel-node",
+    "build": "nuxt build",
+    "start": "cross-env NODE_ENV=production node server/index.js --exec babel-node",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "cross-env": "^5.2.0",
+    "element-ui": "^2.4.11",
+    "koa": "^2.6.2",
+    "nuxt": "^2.0.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "nodemon": "^1.18.9",
+    "stylus": "^0.54.7",
+    "stylus-loader": "^3.0.2"
+  }
+}
