@@ -88,6 +88,8 @@ export default {
     },
     enter (e) {
       this.kind = e.target.querySelector('i').className
+      console.log(this.kind);
+      
     },
     sover(){
       clearTimeout(this._timer)
