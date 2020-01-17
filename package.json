@@ -14,7 +14,11 @@
     "cross-env": "^5.2.0",
     "element-ui": "^2.4.11",
     "koa": "^2.6.2",
+    "koa-redis": "^4.0.1",
+    "koa-router": "^7.4.0",
+    "mongoose": "^5.8.7",
     "node-sass": "^4.13.0",
+    "nodemailer": "^6.4.2",
     "nuxt": "^2.0.0",
     "sass-loader": "^8.0.0"
   },
