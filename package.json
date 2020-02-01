@@ -15,10 +15,10 @@
     "cross-env": "^5.2.0",
     "element-ui": "^2.4.11",
     "koa": "^2.6.2",
-<<<<<<< HEAD
+    "koa-bodyparser": "^4.2.1",
+    "koa-generic-session": "^2.0.4",
+    "koa-json": "^2.0.2",
     "koa-passport": "^4.1.3",
-=======
->>>>>>> be5c81897da5deadd6ea2d7c3bc0717eb4a1eb79
     "koa-redis": "^4.0.1",
     "koa-router": "^7.4.0",
     "mongoose": "^5.8.7",

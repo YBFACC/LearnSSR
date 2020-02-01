@@ -1,7 +1,6 @@
 import Router from "koa-router";
 import Redis from "koa-redis";
 import nodeMailer from "nodemailer";
-<<<<<<< HEAD
 import User from "../dbs/models/users";
 import Passport from "./utils/passport";
 import Email from "../dbs/config";
@@ -184,9 +183,3 @@ router.get("/getUser", async (ctx, next) => {
 });
 
 export default router;
-=======
-import User from '../dbs/models/users'
-import Passport from './utils/passport'
-import Email from '../dbs/config'
-import axios from './utils/axios'
->>>>>>> be5c81897da5deadd6ea2d7c3bc0717eb4a1eb79
