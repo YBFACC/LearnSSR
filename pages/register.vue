@@ -2,11 +2,17 @@
   <div class="page-register">
     <article class="header">
       <header>
-        <a href="/" class="site-logo" />
+        <a
+          href="/"
+          class="site-logo"
+        />
         <span class="login">
           <em class="bold">已有美团账号？</em>
           <a href="/login">
-            <el-button type="primary" size="small">登录</el-button>
+            <el-button
+              type="primary"
+              size="small"
+            >登录</el-button>
           </a>
         </span>
       </header>
@@ -20,15 +26,31 @@
         label-width="100px"
         class="demo-ruleForm"
       >
-        <el-form-item label="昵称" prop="name">
+        <el-form-item
+          label="昵称"
+          prop="name"
+        >
           <el-input v-model="ruleForm.name"></el-input>
         </el-form-item>
-        <el-form-item label="邮箱" prop="email">
-          <el-input v-model="ruleForm.email" placeholder=""></el-input>
-          <el-button size="mini" round @click="sendMsg">发送验证码</el-button>
+        <el-form-item
+          label="邮箱"
+          prop="email"
+        >
+          <el-input
+            v-model="ruleForm.email"
+            placeholder=""
+          ></el-input>
+          <el-button
+            size="mini"
+            round
+            @click="sendMsg"
+          >发送验证码</el-button>
           <span class="status">{{ statusMsg }}</span>
         </el-form-item>
-        <el-form-item label="验证码" prop="code">
+        <el-form-item
+          label="验证码"
+          prop="code"
+        >
           <el-input
             v-model="ruleForm.code"
             placeholder=""
@@ -36,18 +58,31 @@
           ></el-input>
         </el-form-item>
 
-        <el-form-item label="密码" prop="pwd">
-          <el-input v-model="ruleForm.pwd" type="password"></el-input>
+        <el-form-item
+          label="密码"
+          prop="pwd"
+        >
+          <el-input
+            v-model="ruleForm.pwd"
+            type="password"
+          ></el-input>
         </el-form-item>
 
-        <el-form-item label="确认密码" prop="cpwd">
-          <el-input v-model="ruleForm.cpwd" type="password"></el-input>
+        <el-form-item
+          label="确认密码"
+          prop="cpwd"
+        >
+          <el-input
+            v-model="ruleForm.cpwd"
+            type="password"
+          ></el-input>
         </el-form-item>
 
         <el-form-item>
-          <el-button type="primary" @click="register"
-            >同意以下协议并注册</el-button
-          >
+          <el-button
+            type="primary"
+            @click="register"
+          >同意以下协议并注册</el-button>
           <div class="error">{{ error }}</div>
         </el-form-item>
         <el-form-item>
@@ -55,8 +90,7 @@
             class="f1"
             href="http://www.meituan.com/about/terms"
             target="_blank"
-            >《美团网用户协议》</a
-          >
+          >《美团网用户协议》</a>
         </el-form-item>
       </el-form>
     </section>
@@ -66,7 +100,7 @@
 export default {
   layout: "blank",
   name: "register",
-  data() {
+  data () {
     return {
       statusMsg: "",
       error: "",
@@ -124,8 +158,49 @@ export default {
     };
   },
   methods: {
-    sendMsg() {},
-    register() {}
+    sendMsg () {
+      const self = this;
+      let namePass;
+      let emailPass;
+      if (self.timerid) {
+        return false;
+      }
+      this.$refs["ruleForm"].validateField("name", valid => {
+        namePass = valid;
+      });
+      this.$refs["ruleForm"].validateField("name", valid => {
+        namePass = valid;
+      });
+      self.statusMsg = "";
+      if (namePass) {
+        return false;
+      }
+      this.$refs["ruleForm"].validateField("email", valid => {
+        emailPass = valid;
+      });
+      if (!namePass && !emailPass) {
+        self.$axios
+          .post("/users/verify", {
+            username: encodeURIComponent(self.ruleForm.name),
+            email: self.ruleForm.email
+          })
+          .then(({ status, data }) => {
+            if (status === 200 && data && data.code === 0) {
+              let count = 60;
+              self.statusMsg = `验证码已发送,剩余${count--}秒`;
+              self.timerid = setInterval(function () {
+                self.statusMsg = `验证码已发送,剩余${count--}秒`;
+                if (count === 0) {
+                  clearInterval(self.timerid);
+                }
+              }, 1000);
+            } else {
+              self.statusMsg = data.msg;
+            }
+          })
+      }
+    },
+    register () { }
   }
 };
 </script>
